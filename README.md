@@ -1,5 +1,7 @@
 # fd-ontology-kernel
 
+> **Part of the [Base line (寻数·壹座)](https://www.finddatatech.cloud/products/base) of [FindData](https://www.finddatatech.cloud)** — shared ontology mechanisms: one write path, an append-only event trail in the same transaction, closed vocabularies.
+
 The shared mechanisms behind every ontology surface in this workspace: one write
 path, an append-only event trail in the same transaction, closed vocabularies,
 additive-only releases, content-only digests, and a conformance gate that tells
