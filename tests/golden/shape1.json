@@ -1,0 +1,163 @@
+{
+  "shape": 1,
+  "source": "fd-wire/api/fd_wire_api/entities/versioning.py",
+  "cases": [
+    {
+      "name": "mixed-three-entities",
+      "payload": {
+        "entities": [
+          {
+            "id": 1,
+            "name": "客户",
+            "dataset_id": "ds-customer",
+            "pk_columns": [
+              "customer_id"
+            ],
+            "description": "客户主数据",
+            "display_column": "customer_id",
+            "column_notes": {
+              "credit_limit": "元"
+            },
+            "tier": "silver",
+            "sensitivity": "internal"
+          },
+          {
+            "id": 2,
+            "name": "订单",
+            "dataset_id": "ds-order",
+            "pk_columns": [
+              "order_id"
+            ],
+            "description": null,
+            "display_column": "order_id",
+            "column_notes": null,
+            "tier": null,
+            "sensitivity": null
+          },
+          {
+            "id": 3,
+            "name": "合同",
+            "dataset_id": "ds-contract",
+            "pk_columns": [
+              "contract_id",
+              "revision"
+            ],
+            "description": "合同（含版本）",
+            "display_column": null,
+            "column_notes": {
+              "amount": "元"
+            },
+            "tier": "gold",
+            "sensitivity": "confidential"
+          }
+        ],
+        "relationships": [
+          {
+            "id": 11,
+            "from_entity_id": 2,
+            "from_column": "customer_id",
+            "to_entity_id": 1,
+            "to_column": "customer_id",
+            "kind": "n:1",
+            "declared_kind": "n:1",
+            "label": "下单客户",
+            "junction_dataset_id": null,
+            "junction_source_column": null,
+            "junction_target_column": null,
+            "tier": null,
+            "sensitivity": null
+          },
+          {
+            "id": 12,
+            "from_entity_id": 3,
+            "from_column": "contract_id",
+            "to_entity_id": 2,
+            "to_column": "order_id",
+            "kind": "n:1",
+            "declared_kind": "1:n",
+            "label": null,
+            "junction_dataset_id": null,
+            "junction_source_column": null,
+            "junction_target_column": null,
+            "tier": "bronze",
+            "sensitivity": null
+          }
+        ]
+      },
+      "digest": "a4eccbcc0cfd32c7136ab15d9b9c9b87d2231b18d3a14cea293f5b5116ec37da"
+    },
+    {
+      "name": "single-entity-no-relations",
+      "payload": {
+        "entities": [
+          {
+            "id": 7,
+            "name": "发票",
+            "dataset_id": "ds-invoice",
+            "pk_columns": [
+              "invoice_no"
+            ],
+            "description": "",
+            "display_column": null,
+            "column_notes": {},
+            "tier": "raw",
+            "sensitivity": "public"
+          }
+        ],
+        "relationships": []
+      },
+      "digest": "ee277f4f37589af1e4fa516e614953c7b7de0267f6777ed7d32642fa646aec71"
+    },
+    {
+      "name": "many-to-many-junction",
+      "payload": {
+        "entities": [
+          {
+            "id": 20,
+            "name": "商品",
+            "dataset_id": "ds-sku",
+            "pk_columns": [
+              "sku"
+            ],
+            "description": "商品主数据",
+            "display_column": "sku",
+            "column_notes": null,
+            "tier": "silver",
+            "sensitivity": "internal"
+          },
+          {
+            "id": 21,
+            "name": "仓库",
+            "dataset_id": "ds-warehouse",
+            "pk_columns": [
+              "warehouse_code"
+            ],
+            "description": null,
+            "display_column": "warehouse_code",
+            "column_notes": null,
+            "tier": null,
+            "sensitivity": null
+          }
+        ],
+        "relationships": [
+          {
+            "id": 30,
+            "from_entity_id": 20,
+            "from_column": "sku",
+            "to_entity_id": 21,
+            "to_column": "warehouse_code",
+            "kind": "m:n",
+            "declared_kind": "m:n",
+            "label": "库存",
+            "junction_dataset_id": "ds-stock",
+            "junction_source_column": "sku",
+            "junction_target_column": "warehouse_code",
+            "tier": "bronze",
+            "sensitivity": "internal"
+          }
+        ]
+      },
+      "digest": "bec12255a224ce1b3faf1b483e881401e9d3ad2554fc44875b79e8b4b25e5d56"
+    }
+  ]
+}

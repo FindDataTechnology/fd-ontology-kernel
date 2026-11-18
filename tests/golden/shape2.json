@@ -1,0 +1,162 @@
+{
+  "shape": 2,
+  "source": "law-bench-internal/src/bench/distribution.py",
+  "cases": [
+    {
+      "name": "mixed-three-entities",
+      "payload": {
+        "domain": "legal-fixture",
+        "template_name": "legal",
+        "template_version": 4,
+        "entity_types": [
+          "law",
+          "clause",
+          "concept"
+        ],
+        "relationship_kinds": [
+          "cites_law",
+          "defines"
+        ],
+        "entities": [
+          {
+            "kind": "law",
+            "external_key": "合同法",
+            "body": "中华人民共和国合同法",
+            "tier": "raw",
+            "sensitivity": "internal",
+            "attrs": {
+              "aliases": [
+                "中华人民共和国合同法"
+              ]
+            }
+          },
+          {
+            "kind": "clause",
+            "external_key": "合同法#第12条",
+            "body": "第十二条 合同的形式",
+            "tier": "raw",
+            "sensitivity": null,
+            "attrs": {}
+          },
+          {
+            "kind": "concept",
+            "external_key": "违约责任",
+            "body": "违约责任",
+            "tier": "silver",
+            "sensitivity": null,
+            "attrs": {}
+          }
+        ],
+        "relationships": [
+          {
+            "kind": "defines",
+            "external_key": "违约责任->defines:合同法#第12条",
+            "body": "违约责任 defines 合同法#第12条",
+            "tier": "raw",
+            "sensitivity": null,
+            "attrs": {
+              "from_key": "违约责任",
+              "to_key": "合同法#第12条"
+            },
+            "from_key": "违约责任",
+            "to_key": "合同法#第12条"
+          }
+        ]
+      },
+      "digest": "f28a1cacdf25840d838a6492e43bd0825f44b52fabe41703fe99090ee718ac47"
+    },
+    {
+      "name": "single-law-no-relations",
+      "payload": {
+        "domain": "legal-fixture",
+        "template_name": "legal",
+        "template_version": 4,
+        "entity_types": [
+          "law"
+        ],
+        "relationship_kinds": [
+          "cites_law"
+        ],
+        "entities": [
+          {
+            "kind": "law",
+            "external_key": "民法典",
+            "body": "中华人民共和国民法典",
+            "tier": "gold",
+            "sensitivity": null,
+            "attrs": {}
+          }
+        ],
+        "relationships": []
+      },
+      "digest": "53f636cd94861ecb9b40bd74138656045e0d6d8b3bb1614f606348c3c0b9a36f"
+    },
+    {
+      "name": "nested-attrs-and-aliases",
+      "payload": {
+        "domain": "legal-fixture",
+        "template_name": "legal",
+        "template_version": 4,
+        "entity_types": [
+          "law",
+          "clause",
+          "concept"
+        ],
+        "relationship_kinds": [
+          "cites_law",
+          "defines"
+        ],
+        "entities": [
+          {
+            "kind": "law",
+            "external_key": "担保法",
+            "body": "中华人民共和国担保法",
+            "tier": "raw",
+            "sensitivity": null,
+            "attrs": {}
+          },
+          {
+            "kind": "concept",
+            "external_key": "连带清偿责任",
+            "body": "连带清偿责任",
+            "tier": "silver",
+            "sensitivity": "public",
+            "attrs": {
+              "aliases": [
+                "连带责任",
+                "连带清偿"
+              ],
+              "folded_by": [
+                "drop-prc"
+              ],
+              "nested": {
+                "levels": [
+                  1,
+                  2,
+                  3
+                ],
+                "note": "多层属性"
+              }
+            }
+          }
+        ],
+        "relationships": [
+          {
+            "kind": "cites_law",
+            "external_key": "连带清偿责任->cites_law:担保法#第18条",
+            "body": "连带清偿责任 cites_law 担保法#第18条",
+            "tier": "raw",
+            "sensitivity": null,
+            "attrs": {
+              "from_key": "连带清偿责任",
+              "to_key": "担保法#第18条"
+            },
+            "from_key": "连带清偿责任",
+            "to_key": "担保法#第18条"
+          }
+        ]
+      },
+      "digest": "98a9261d997a873a090980be63d45904b120910fa4b92be734b939fd6ffa7dc8"
+    }
+  ]
+}

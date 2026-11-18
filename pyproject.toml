@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fd-ontology-kernel"
+version = "0.1.0"
+description = "Ontology construction kernel: the mechanisms shared by domain, customer and vocabulary ontology surfaces"
+readme = "README.md"
+requires-python = ">=3.11"
+# Deliberately empty. This package is imported by deployed services and by
+# libraries that are pulled in through sys.path; a third-party dependency here
+# would break every consumer's environment (measured 2026-11-10: adding
+# prometheus_client to a sys.path-imported package made two consumer repos fail
+# to import at all). Standard library only, forever.
+dependencies = []
+
+[tool.setuptools.packages.find]
+include = ["fd_ontology_kernel*"]
+
+[tool.setuptools.package-data]
+fd_ontology_kernel = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

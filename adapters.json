@@ -1,0 +1,54 @@
+{
+  "kernel_contract": "1.0",
+  "adapters": [
+    {
+      "name": "memory",
+      "system": "fd-ontology-kernel",
+      "module": "fd_ontology_kernel.conformance.memory_adapter",
+      "factory": "build",
+      "kernel_contract": "1.0",
+      "manifest_shape": 2,
+      "notes": "in-memory reference adapter; the gate's known-good baseline"
+    },
+    {
+      "name": "fd-open-data-protocol",
+      "system": "fd-open-data-protocol",
+      "module": "fd_open_data_protocol.conformance_adapter",
+      "factory": "build",
+      "kernel_contract": "1.0",
+      "manifest_shape": 2,
+      "paths": ["../fd-open-data-protocol"],
+      "notes": "YAML vocabulary surface; sandbox is an in-memory store over the shipped release"
+    },
+    {
+      "name": "fd-wire",
+      "system": "fd-wire",
+      "module": "fd_wire_api.conformance_adapter",
+      "factory": "build",
+      "kernel_contract": "1.0",
+      "manifest_shape": 1,
+      "paths": ["../fd-wire/api"],
+      "notes": "customer object surface (id-addressed, shape 1); SQLite sandbox over the real ORM; proposals are a read-only projection over action-gate records, no distribution registry"
+    },
+    {
+      "name": "law-bench-internal",
+      "system": "law-bench-internal",
+      "module": "bench.conformance_adapter",
+      "factory": "build",
+      "kernel_contract": "1.0",
+      "manifest_shape": 2,
+      "paths": ["../law-bench-internal/src", "../law-bench-internal"],
+      "notes": "domain authoring surface (key-addressed, shape 2); throwaway PostgreSQL database per sandbox, dropped at exit; needs database_url (a .env next to the repo works) and a reachable PG"
+    },
+    {
+      "name": "toy",
+      "system": "toy-json",
+      "module": "toy_adapter",
+      "factory": "build",
+      "kernel_contract": "1.0",
+      "manifest_shape": 2,
+      "paths": ["examples"],
+      "notes": "worked example for the README: all six ports over one JSON file, every capability present (no skips)"
+    }
+  ]
+}
